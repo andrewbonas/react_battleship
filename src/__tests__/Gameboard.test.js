@@ -18,8 +18,7 @@ test("new ships take up 1 spot per length on board", () => {
   let board = Gameboard();
   board.createBoard();
   let ship = Ship(1, 2, false);
-  let pos = board.board[0][0];
-  board.shipPos(ship, pos) ;
+  board.shipPos(ship, 0, 0);
 expect(board.board[0][0]).toBe("x");
 expect(board.board[0][1]).toBe("x");
 expect(board.board[0][2]).toBe("");
@@ -29,10 +28,17 @@ test("ships placed vertically on board when vertical true", () => {
   let board = Gameboard();
   board.createBoard();
   let ship = Ship(1, 2, true);
-  let pos = board.board[0][0];
-  board.shipPos(ship, pos) ;
-expect(board[0][0]).toBe("x");
-expect(board[1][0]).toBe("x");
-expect(board[0][1]).toBe("");
+  board.shipPos(ship, 0, 0) ;
+expect(board.board[0][0]).toBe("x");
+expect(board.board[1][0]).toBe("x");
+expect(board.board[0][1]).toBe("");
+});
+
+test("ship cannot be off the board", () => {
+  let board = Gameboard();
+  board.createBoard();
+  let ship = Ship(1, 2, true);
+  board.shipPos(ship, 9, 9) ;
+expect(board.board[9][9]).toBe("");
 });
 
