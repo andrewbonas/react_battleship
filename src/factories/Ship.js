@@ -1,6 +1,7 @@
 const Ship = (id, length, vertical) => {
   let shipHealth = length;
   let sunkStatus = false;
+  let display = "x";
 
   const sunk = () => {
     return (obj.sunkStatus = true);
@@ -19,7 +20,7 @@ const Ship = (id, length, vertical) => {
       return true;
     }
   };
-  const obj = { id, length, vertical, sunkStatus, shipHealth, attacked };
+  const obj = { id, length, vertical, sunkStatus, shipHealth, display, attacked };
   return obj;
 };
 

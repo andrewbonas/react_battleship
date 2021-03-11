@@ -19,8 +19,8 @@ test("new ships take up 1 spot per length on board", () => {
   board.createBoard();
   let ship = Ship(1, 2, false);
   board.shipPos(ship, 0, 0);
-expect(board.board[0][0]).toBe("x");
-expect(board.board[0][1]).toBe("x");
+expect(board.board[0][0]).toBe(ship);
+expect(board.board[0][1]).toBe(ship);
 expect(board.board[0][2]).toBe("");
 });
 
@@ -29,8 +29,8 @@ test("ships placed vertically on board when vertical true", () => {
   board.createBoard();
   let ship = Ship(1, 2, true);
   board.shipPos(ship, 0, 0) ;
-expect(board.board[0][0]).toBe("x");
-expect(board.board[1][0]).toBe("x");
+expect(board.board[0][0]).toBe(ship);
+expect(board.board[1][0]).toBe(ship);
 expect(board.board[0][1]).toBe("");
 });
 
@@ -41,4 +41,34 @@ test("ship cannot be off the board", () => {
   board.shipPos(ship, 9, 9) ;
 expect(board.board[9][9]).toBe("");
 });
+
+test("attack returns ship health -1 when ship is hit", () => {
+  let board = Gameboard();
+  board.createBoard();
+  let ship = Ship(1, 3, false);
+  board.shipPos(ship, 0, 0) ;
+  board.receiveAttack(0,1);
+expect(ship.shipHealth).toBe(2);
+});
+
+test("attack does not effect ship health when attack missed", () => {
+  let board = Gameboard();
+  board.createBoard();
+  let ship = Ship(1, 3, false);
+  board.shipPos(ship, 0, 0) ;
+  board.receiveAttack(0,4);
+expect(ship.shipHealth).toBe(3);
+});
+
+test("when all ships are sunk gameboard all sunk returns true", () => {
+  let board = Gameboard();
+  board.createBoard();
+  let ship = Ship(1, 2, false);
+  board.shipPos(ship, 0, 0) ;
+  board.receiveAttack(0,0);
+  board.receiveAttack(0,1);
+expect(board.allSunk).toBeTruthy();
+});
+
+
 

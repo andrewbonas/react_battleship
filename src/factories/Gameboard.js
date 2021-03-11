@@ -22,15 +22,51 @@ const Gameboard = () => {
     } else {
       for (let i = 0; i < ship.length; i++) {
         if (ship.vertical === true) {
-          board[row + i][col] = "x";
+          board[row + i][col] = ship;
         } else {
-          board[row][col + i] = "x";
+          board[row][col + i] = ship;
         }
       }
       return updatedBoard;
     }
   };
-  const obj = { board, createBoard, updatedBoard, shipPos };
+
+  const receiveAttack = (row, col) => {
+    let attack = board[row][col];
+    if (attack.display === "x") {
+      attack.attacked(true);
+    } else {
+      board[row][col] = "o";
+    }
+
+    return attack;
+  };
+
+  const allSunk = () => {
+    let allDestroyed = false;
+    for (let i = 0; i < 10; i++) {
+      let boardRow = board[i];
+      let allShips = boardRow.filter((ship) => ship.shipHealth > 0);
+      let shipsAlive = allShips.length;
+      if (shipsAlive > 0) {
+        allDestroyed = true;
+      }
+    }
+    if (!allDestroyed) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const obj = {
+    board,
+    createBoard,
+    updatedBoard,
+    shipPos,
+    receiveAttack,
+    allSunk,
+  };
+  obj;
   return obj;
 };
 
