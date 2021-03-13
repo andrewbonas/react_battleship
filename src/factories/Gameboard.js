@@ -1,29 +1,29 @@
-const Ship = (id, length, vertical) => {
-  let shipHealth = length;
-  let sunkStatus = false;
-  let display = "x";
+// const Ship = (id, length, vertical) => {
+//   let shipHealth = length;
+//   let sunkStatus = false;
+//   let display = "x";
 
 
-  const sunk = () => {
-    return (obj.sunkStatus = true);
-  };
+//   const sunk = () => {
+//     return (obj.sunkStatus = true);
+//   };
 
-  const damage = (x) => {
-    let updatedHealth = (obj.shipHealth -= x);
-    if (updatedHealth <= 0) {
-      sunk();
-    }
-  };
+//   const damage = (x) => {
+//     let updatedHealth = (obj.shipHealth -= x);
+//     if (updatedHealth <= 0) {
+//       sunk();
+//     }
+//   };
 
-  const attacked = (hit) => {
-    if (hit === true) {
-      damage(1);
-      return true;
-    }
-  };
-  const obj = { id, length, vertical, sunkStatus, shipHealth, display, attacked };
-  return obj;
-};
+//   const attacked = (hit) => {
+//     if (hit === true) {
+//       damage(1);
+//       return true;
+//     }
+//   };
+//   const obj = { id, length, vertical, sunkStatus, shipHealth, display, attacked };
+//   return obj;
+// };
 
 
 const Gameboard = () => {
@@ -62,6 +62,7 @@ const Gameboard = () => {
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
     if (attack.display === "x") {
+      attack.display = "o"
       attack.attacked(true);
     } else {
       board[row][col] = "o";
@@ -94,21 +95,19 @@ const Gameboard = () => {
     receiveAttack,
     allSunk,
   };
-  obj;
   return obj;
 };
 
-const test = Ship(1,1, false);
-const neww = Ship(2,3, false);
+// const test = Ship(1,1, false);
+// const neww = Ship(2,3, false);
 
 
-const board = Gameboard();
-board.createBoard();
-board.shipPos(test, 0, 0);
-board.receiveAttack(0, 0);
+// const board = Gameboard();
+// board.createBoard();
+// board.shipPos(test, 0, 0);
+// board.receiveAttack(0, 0);
 
-let tests = board.allSunk();
-tests
+// let tests = board.allSunk();
 
 
 export default Gameboard;

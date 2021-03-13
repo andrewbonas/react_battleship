@@ -23,6 +23,5 @@ test("computer makes moves on players board", () => {
 
 test("if player 1 (user) unable computer attack", () => {
   let player = Player(1);
-  
   expect(player.computerAttack()).toBe(undefined);
 });

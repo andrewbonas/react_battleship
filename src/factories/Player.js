@@ -1,3 +1,111 @@
+// const Ship = (id, length, vertical) => {
+//   let shipHealth = length;
+//   let sunkStatus = false;
+//   let display = "x";
+
+//   const sunk = () => {
+//     return (obj.sunkStatus = true);
+//   };
+
+//   const damage = (x) => {
+//     let updatedHealth = (obj.shipHealth -= x);
+//     if (updatedHealth <= 0) {
+//       sunk();
+//     }
+//   };
+
+//   const attacked = (hit) => {
+//     if (hit === true) {
+//       damage(1);
+//       return true;
+//     }
+//   };
+//   const obj = {
+//     id,
+//     length,
+//     vertical,
+//     sunkStatus,
+//     shipHealth,
+//     display,
+//     attacked,
+//   };
+//   return obj;
+// };
+
+// const Gameboard = () => {
+//   let board = [];
+//   let updatedBoard;
+
+//   const createBoard = () => {
+//     for (var i = 0; i < 10; i++) {
+//       board[i] = [];
+//       for (var j = 0; j < 10; j++) {
+//         board[i][j] = "";
+//       }
+//     }
+//     return obj.board;
+//   };
+
+//   const shipPos = (ship, row, col) => {
+//     let updatedBoard = board;
+//     if (
+//       (ship.vertical && row + ship.length > 10) ||
+//       (!ship.vertical && col + ship.length > 10)
+//     ) {
+//       return false;
+//     } else {
+//       for (let i = 0; i < ship.length; i++) {
+//         if (ship.vertical === true) {
+//           board[row + i][col] = ship;
+//         } else {
+//           board[row][col + i] = ship;
+//         }
+//       }
+//       return updatedBoard;
+//     }
+//   };
+
+//   const receiveAttack = (row, col) => {
+//     let attack = board[row][col];
+//     if (attack.display === "x") {
+//       attack.display = "o";
+//       attack.attacked(true);
+//     } else {
+//       board[row][col] = "o";
+//     }
+
+//     return attack;
+//   };
+
+//   const allSunk = () => {
+//     let allDestroyed = false;
+//     for (let i = 0; i < 10; i++) {
+//       let boardRow = board[i];
+//       let allShips = boardRow.filter((ship) => ship.shipHealth > 0);
+//       let shipsAlive = allShips.length;
+//       if (shipsAlive > 0) {
+//         allDestroyed = true;
+//       }
+//     }
+//     if (!allDestroyed) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   };
+//   const obj = {
+//     board,
+//     createBoard,
+//     updatedBoard,
+//     shipPos,
+//     receiveAttack,
+//     allSunk,
+//   };
+//   return obj;
+// };
+
+
+
 const Player = (player) => {
   let compShot;
   const computerAttack = () => {
@@ -13,16 +121,38 @@ const Player = (player) => {
   };
 
   const validShot = (row, col) => {
-    if (board.board[row][col] === "o") {
-      return false;
-    }
-    return true;
+    // if (board.board[row][col] === "o") {
+    //   return false;
+    // }
+     return true;
   };
 
-  const obj = { computerAttack, compShot };
+  const game = () => {
+ 
+  };
+
+  const obj = { computerAttack, compShot, game};
 
   return obj;
 };
+
+// const run = Player();
+// run.game();
+
+// const test = Ship(1, 1, false);
+// const neww = Ship(2, 3, false);
+
+// const board = Gameboard();
+// board.createBoard();
+// board.shipPos(test, 0, 0);
+// board.receiveAttack(0, 0);
+
+// let tests = board.allSunk();
+
+// const player = Player(2);
+
+// let shots = player.computerAttack();
+// let shotss = player.computerAttack();
 
 
 export default Player;
