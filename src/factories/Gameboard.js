@@ -62,12 +62,11 @@ const Gameboard = () => {
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
     if (attack.display === "x") {
-      attack.display = "o"
       attack.attacked(true);
+      board[row][col] = "☠";
     } else {
       board[row][col] = "o";
     }
-
     return attack;
   };
 

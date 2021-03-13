@@ -1,7 +1,6 @@
 import Gameboard from "../factories/Gameboard";
 import Ship from "../factories/Ship";
 
-
 test("new board returns 10x10 board", () => {
     let board = Gameboard();
     board.createBoard();

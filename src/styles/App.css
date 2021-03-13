@@ -1,4 +1,4 @@
-.col {
+.comp-col, .user-col {
   color: red;
   padding: 10px;
   margin: 2px;
@@ -6,12 +6,15 @@
   border: 1px solid black;
 }
 
-.row {
+span {
+}
+
+.comp-row, .user-row {
   padding: 10px;
   margin: 10px;
 }
 
-.board-ctn {
+.comp-board-ctn, .user-board-ctn {
   text-align: center;
   margin: 5px;
   border: solid 1px red;
