@@ -1,3 +1,5 @@
+
+
 // const Ship = (id, length, vertical) => {
 //   let shipHealth = length;
 //   let sunkStatus = false;
@@ -108,12 +110,13 @@
 
 const Player = (player) => {
   let compShot;
-  const computerAttack = () => {
+
+  const computerAttack = (playerBoard) => {
     if (player === 2) {
       let row = Math.floor(Math.random() * 10);
       let col = Math.floor(Math.random() * 10);
       if (validShot(row, col)) {
-        obj.compShot = [row, col];
+        playerBoard.receiveAttack(row, col);
       } else {
         computerAttack();
       }
@@ -131,7 +134,7 @@ const Player = (player) => {
  
   };
 
-  const obj = { computerAttack, compShot, game};
+  const obj = { computerAttack, game};
 
   return obj;
 };

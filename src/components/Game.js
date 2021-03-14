@@ -1,14 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Game.css";
 import Gameboard from "../factories/Gameboard";
 import Ship from "../factories/Ship";
+import Player from "../factories/Player";
 
 const Game = () => {
   const playerBoard = Gameboard();
   playerBoard.createBoard();
   const compBoard = Gameboard();
   compBoard.createBoard();
+  const computer = Player(2);
   const [compDisplay, setCompDisplay] = useState(compBoard.board);
+  const [playerDisplay, setPlayerDisplay] = useState(playerBoard.board);
+
+  const [playerTurn, setPlayerTurn] = useState(false);
 
   //player board set for test
   const smPlayerBoat = Ship(1, 1, false);
@@ -24,47 +29,60 @@ const Game = () => {
   compBoard.shipPos(smCompBoat, 0, 0);
   compBoard.shipPos(mdCompBoat, 5, 5);
   compBoard.shipPos(lgCompBoat, 9, 0);
-  compBoard.receiveAttack(0, 0);
-  compBoard.receiveAttack(1, 1);
 
   //
-  
-  // const gameRound = () => {
+  const computerTurn = () => {
+    setTimeout(function () {
+      computer.computerAttack(playerBoard);
+      updatePlayerBoardDisplay();
+    }, 700);
+  };
 
-  // }
+  const gameRound = (clickedRow, clickedCol) => {
+    compBoard.receiveAttack(clickedRow, clickedCol);
+    updateCompBoardDisplay();
+    computerTurn();
+  };
 
   useEffect(() => {
     const handleClick = (e) => {
       let boardTile = e.target.classList.value;
+      let boardItem = e.target.innerHTML;
       let clickedCol = parseInt(e.target.dataset.id);
       let clickedRow = parseInt(e.target.parentElement.dataset.id);
-      if (boardTile === 'comp-col') {
-        compBoard.receiveAttack(clickedRow, clickedCol);
-        updateCompBoard();
+      if (boardTile === "comp-col" && boardItem !== "☠" && boardItem !== "o") {
+        gameRound(clickedRow, clickedCol);
       }
     };
-   
+
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const updateCompBoard = (clickedCard) => {
+  const updateCompBoardDisplay = () => {
     let old = [...compDisplay];
     setCompDisplay(
       old.map((display) => {
         return display;
       })
     );
-
   };
 
+  const updatePlayerBoardDisplay = () => {
+    let old = [...playerDisplay];
+    setPlayerDisplay(
+      old.map((display) => {
+        return display;
+      })
+    );
+  };
   return (
     <div className="game">
       <div className="user-board-ctn">
         <h1>Player's Board</h1>
-        {playerBoard.board.map((row, i) => (
+        {playerDisplay.map((row, i) => (
           <div className="user-row" data-id={i} key={i}>
             {row.map((col, j) => (
               <span data-id={j} className="user-col" key={j}>

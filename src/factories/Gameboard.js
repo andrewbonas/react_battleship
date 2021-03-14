@@ -62,12 +62,15 @@ const Gameboard = () => {
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
     if (attack.display === "x") {
+      console.log('hit');
       attack.attacked(true);
       board[row][col] = "☠";
-    } else {
+    } else if(attack === "") {
+      console.log('miss');
       board[row][col] = "o";
+    } else {
+      console.log('invalid');
     }
-    return attack;
   };
 
   const allSunk = () => {
