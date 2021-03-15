@@ -109,25 +109,30 @@
 
 
 const Player = (player) => {
-  let compShot;
-
+  let computerAttempts = 0; // prevent infinite loop if computer can't make a valid shot. 
+  
   const computerAttack = (playerBoard) => {
+   computerAttempts = computerAttempts + 1;
     if (player === 2) {
       let row = Math.floor(Math.random() * 10);
       let col = Math.floor(Math.random() * 10);
-      if (validShot(row, col)) {
+      if (validShot(playerBoard,row, col)) {
         playerBoard.receiveAttack(row, col);
+      } else if (computerAttempts < 500) {
+        computerAttack(playerBoard);
       } else {
-        computerAttack();
+        return
       }
     }
   };
 
-  const validShot = (row, col) => {
-    // if (board.board[row][col] === "o") {
-    //   return false;
-    // }
-     return true;
+  const validShot = (playerBoard, row, col) => {
+    console.log(playerBoard.board[row][col]);
+    if (playerBoard.board[row][col] === "" || playerBoard.board[row][col].display === "x") {
+       return true;
+     }else {
+     return false;
+     }
   };
 
   const game = () => {
