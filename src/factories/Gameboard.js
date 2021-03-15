@@ -61,7 +61,8 @@ const Gameboard = () => {
 
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
-    if (attack.display === "x") {
+    console.log(attack);
+    if (attack.ship === "x") {
       console.log('hit');
       attack.attacked(true);
       board[row][col] = "☠";

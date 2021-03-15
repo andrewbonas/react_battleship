@@ -12,6 +12,9 @@ const Game = () => {
   const computer = Player(2);
   const [compDisplay, setCompDisplay] = useState(compBoard.board);
   const [playerDisplay, setPlayerDisplay] = useState(playerBoard.board);
+  const [playerWin, setPlayerWin] = useState(false);
+  const [computerWin, setComputerWin] = useState(false);
+
 
   const [playerTurn, setPlayerTurn] = useState(false);
 
@@ -23,7 +26,7 @@ const Game = () => {
   playerBoard.shipPos(mdPlayerBoat, 3, 3);
   playerBoard.shipPos(lgPlayerBoat, 7, 7);
   //comp board set for test
-  const smCompBoat = Ship(1, 1, false);
+  const smCompBoat = Ship("ship1", 1, false);
   const mdCompBoat = Ship(2, 2, true);
   const lgCompBoat = Ship(3, 3, false);
   compBoard.shipPos(smCompBoat, 0, 0);
@@ -41,11 +44,21 @@ const Game = () => {
   const gameRound = (clickedRow, clickedCol) => {
     compBoard.receiveAttack(clickedRow, clickedCol);
     updateCompBoardDisplay();
-    computerTurn();
+    if(compBoard.allSunk()) {
+      setPlayerWin(true);
+    } else if (playerBoard.allSunk()) {
+      setComputerWin(true);
+    } else {
+      computerTurn();
+    };
+
   };
 
   useEffect(() => {
     const handleClick = (e) => {
+      console.log(e);
+      console.log(e.target.id);
+
       let boardTile = e.target.classList.value;
       let boardItem = e.target.innerHTML;
       let clickedCol = parseInt(e.target.dataset.id);
@@ -78,6 +91,10 @@ const Game = () => {
       })
     );
   };
+
+  function refreshPage(){ 
+    window.location.reload(); 
+}
   return (
     <div className="game">
       <div className="user-board-ctn">
@@ -85,21 +102,33 @@ const Game = () => {
         {playerDisplay.map((row, i) => (
           <div className="user-row" data-id={i} key={i}>
             {row.map((col, j) => (
-              <span data-id={j} className="user-col" key={j}>
-                {col.display ? col.display : col}
+              <span data-id={j} id={col.id ? col.id : null} className="user-col" key={j}>
+                {col.ship ? col.ship : col}
               </span>
             ))}
           </div>
         ))}
       </div>
+      {computerWin && (
+        <div>
+        <div>Computer Wins!</div>
+        <button onClick={ refreshPage }>Reset</button>
+        </div>
+      )}
+      {playerWin && (
+        <div>
+        <div>User Wins!</div>
+        <button onClick={ refreshPage }>Reset</button>
+        </div>
+      )}
 
       <div className="comp-board-ctn">
         <h1>Computer's Board</h1>
         {compDisplay.map((row, i) => (
           <div data-id={i} className="comp-row" key={i}>
             {row.map((col, j) => (
-              <span data-id={j} className="comp-col" key={j}>
-                {col.display ? col.display : col}
+              <span data-id={j} id={col.id ? col.id : null}  className="comp-col" key={j}>
+                {col.compDisplay ? col.compDisplay : col}
               </span>
             ))}
           </div>

@@ -127,8 +127,7 @@ const Player = (player) => {
   };
 
   const validShot = (playerBoard, row, col) => {
-    console.log(playerBoard.board[row][col]);
-    if (playerBoard.board[row][col] === "" || playerBoard.board[row][col].display === "x") {
+    if (playerBoard.board[row][col] === "" || playerBoard.board[row][col].ship === "x") {
        return true;
      }else {
      return false;
