@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useReducer } from "react";
 import "../styles/Game.css";
 import Gameboard from "../factories/Gameboard";
 import Ship from "../factories/Ship";
@@ -14,9 +14,12 @@ const Game = () => {
   const [playerDisplay, setPlayerDisplay] = useState(playerBoard.board);
   const [playerWin, setPlayerWin] = useState(false);
   const [computerWin, setComputerWin] = useState(false);
+  const game = useRef(false);
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  
 
 
-  const [playerTurn, setPlayerTurn] = useState(false);
+
 
   //player board set for test
   const smPlayerBoat = Ship(1, 1, false);
@@ -41,6 +44,11 @@ const Game = () => {
     }, 700);
   };
 
+  const startGame = () => {
+    game.current = true;
+    forceUpdate();
+  };
+ 
   const gameRound = (clickedRow, clickedCol) => {
     compBoard.receiveAttack(clickedRow, clickedCol);
     updateCompBoardDisplay();
@@ -56,17 +64,15 @@ const Game = () => {
 
   useEffect(() => {
     const handleClick = (e) => {
-      console.log(e);
-      console.log(e.target.id);
-
       let boardTile = e.target.classList.value;
       let boardItem = e.target.innerHTML;
       let clickedCol = parseInt(e.target.dataset.id);
       let clickedRow = parseInt(e.target.parentElement.dataset.id);
-      if (boardTile === "comp-col" && boardItem !== "☠" && boardItem !== "o") {
+      if (game.current && boardTile === "comp-col" && boardItem !== "☠" && boardItem !== "o") {
         gameRound(clickedRow, clickedCol);
       }
     };
+    
 
     document.addEventListener("click", handleClick);
     return () => {
@@ -92,9 +98,11 @@ const Game = () => {
     );
   };
 
-  function refreshPage(){ 
+  const refreshPage = () => { 
     window.location.reload(); 
 }
+
+
   return (
     <div className="game">
       <div className="user-board-ctn">
@@ -109,6 +117,13 @@ const Game = () => {
           </div>
         ))}
       </div>
+      {!game.current && (
+        <div>
+         <button onClick={startGame}>Start</button>
+        <button onClick={ refreshPage }>Shuffle Ships</button>
+
+        </div>
+      )}
       {computerWin && (
         <div>
         <div>Computer Wins!</div>
@@ -123,6 +138,7 @@ const Game = () => {
       )}
 
       <div className="comp-board-ctn">
+        <span aria-label="fire" role="img">🔥</span>
         <h1>Computer's Board</h1>
         {compDisplay.map((row, i) => (
           <div data-id={i} className="comp-row" key={i}>
