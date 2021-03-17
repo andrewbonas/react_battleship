@@ -1,31 +1,3 @@
-// const Ship = (id, length, vertical) => {
-//   let shipHealth = length;
-//   let sunkStatus = false;
-//   let display = "x";
-
-
-//   const sunk = () => {
-//     return (obj.sunkStatus = true);
-//   };
-
-//   const damage = (x) => {
-//     let updatedHealth = (obj.shipHealth -= x);
-//     if (updatedHealth <= 0) {
-//       sunk();
-//     }
-//   };
-
-//   const attacked = (hit) => {
-//     if (hit === true) {
-//       damage(1);
-//       return true;
-//     }
-//   };
-//   const obj = { id, length, vertical, sunkStatus, shipHealth, display, attacked };
-//   return obj;
-// };
-
-
 const Gameboard = () => {
   let board = [];
   let updatedBoard;
@@ -57,33 +29,31 @@ const Gameboard = () => {
   };
 
   const validPos = (ship, row, col) => {
-    if ((ship.vertical && row + ship.length > 10) || (!ship.vertical && col + ship.length > 10)) {
-    return false
-  }
-  for(let i = 0; i < 10; i++) {
-    if (ship.vertical === true && board[row + i][col] !== "" ) {
-      return false
-    } else if(board[row][col + i] !== "") {
-      return false
-    } else{
-      return true
+    if (
+      (ship.vertical && row + ship.length > 10) ||
+      (!ship.vertical && col + ship.length > 10)
+    ) {
+      return false;
     }
-  }
-}
-  
+    for (let i = 0; i < 10; i++) {
+      if (ship.vertical === true && board[row + i][col] !== "") {
+        return false;
+      } else if (board[row][col + i] !== "") {
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
 
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
-    console.log(attack);
     if (attack.ship === "x") {
-      console.log('hit');
       attack.attacked(true);
       board[row][col] = "☠";
-    } else if(attack === "") {
-      console.log('miss');
+    } else if (attack === "") {
       board[row][col] = "o";
     } else {
-      console.log('invalid');
     }
   };
 
@@ -103,6 +73,7 @@ const Gameboard = () => {
       return false;
     }
   };
+
   const obj = {
     board,
     createBoard,
@@ -113,17 +84,5 @@ const Gameboard = () => {
   };
   return obj;
 };
-
-// const test = Ship(1,1, false);
-// const neww = Ship(2,3, false);
-
-
-// const board = Gameboard();
-// board.createBoard();
-// board.shipPos(test, 0, 0);
-// board.receiveAttack(0, 0);
-
-// let tests = board.allSunk();
-
 
 export default Gameboard;

@@ -2,7 +2,7 @@ const Ship = (id, length, vertical) => {
   let shipHealth = length;
   let sunkStatus = false;
   let compDisplay = "x";
-  let ship = 'x';
+  let ship = "x";
 
   const sunk = () => {
     return (obj.sunkStatus = true);
@@ -21,9 +21,17 @@ const Ship = (id, length, vertical) => {
       return true;
     }
   };
-  const obj = { id, length, vertical, sunkStatus, shipHealth, compDisplay, ship, attacked };
+  const obj = {
+    id,
+    length,
+    vertical,
+    sunkStatus,
+    shipHealth,
+    compDisplay,
+    ship,
+    attacked,
+  };
   return obj;
 };
-
 
 export default Ship;

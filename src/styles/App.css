@@ -1,12 +1,29 @@
 .comp-col, .user-col {
+  display: flex;
   color: red;
-  padding: 10px;
-  margin: 2px;
+  margin: 1px;
   text-align: center;
   border: 1px solid black;
 }
 
-span {
+.comp-row, .user-row {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+  height: 3px;
+  text-align: center;
+
+}
+
+
+span, .comp-col{ 
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
+  margin: 0px;
+  padding: 5px;
+  text-align: center;
 }
 
 .comp-row, .user-row {
@@ -18,6 +35,7 @@ span {
   text-align: center;
   margin: 5px;
   border: solid 1px red;
+  height: 450px;
 }
 
 .game {
