@@ -14,29 +14,66 @@ const Game = () => {
   const [playerDisplay, setPlayerDisplay] = useState(playerBoard.board);
   const [playerWin, setPlayerWin] = useState(false);
   const [computerWin, setComputerWin] = useState(false);
+
   const game = useRef(false);
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   
+const playerShipYard = () => {
+  const playerDestroyer = Ship(1, 2, false);
+  const playerSubmarine = Ship(2, 3, true);
+  const playerCruiser = Ship(3, 3, false);
+  const playerBattleShip = Ship(4, 4, false);
+  const playerCarrier = Ship(5, 5, true);
+  let playerYard = [playerDestroyer,playerSubmarine,playerCruiser,playerBattleShip,playerCarrier]
+  playerYard.forEach(placePlayerShips);
+}
+
+const placePlayerShips = (value) => {
+  let row = Math.floor(Math.random() * 10);
+  let col = Math.floor(Math.random() * 10);
+  if(playerBoard.shipPos(value, row, col)) {
+    return
+  } else {
+    placePlayerShips(value);
+  }
+}
+
+const compShipYard = () => {
+  const compDestroyer = Ship(6, 2, true);
+  const compSubmarine = Ship(7, 3, true);
+  const compCruiser = Ship(8, 3, false);
+  const compBattleShip = Ship(9, 4, false);
+  const compCarrier = Ship(10, 5, false);
+  let compYard = [compDestroyer,compSubmarine,compCruiser,compBattleShip,compCarrier]
+
+  compYard.forEach(placeCompShips);
+}
+
+const placeCompShips = (value) => {
+  let row = Math.floor(Math.random() * 10);
+  let col = Math.floor(Math.random() * 10);
+  if(compBoard.shipPos(value, row, col)) {
+    return
+  } else {
+    placeCompShips(value);
+  }
+}
 
 
+playerShipYard();
+compShipYard();
 
+const shufflePlayerBoard = () => {
+   playerBoard.createBoard();
+  playerShipYard();
+  let shuffled = playerBoard.board
+  setPlayerDisplay(
+    shuffled.map((display) => {
+      return display;
+    })
+  );
+}
 
-  //player board set for test
-  const smPlayerBoat = Ship(1, 1, false);
-  const mdPlayerBoat = Ship(2, 2, true);
-  const lgPlayerBoat = Ship(3, 3, false);
-  playerBoard.shipPos(smPlayerBoat, 0, 0);
-  playerBoard.shipPos(mdPlayerBoat, 3, 3);
-  playerBoard.shipPos(lgPlayerBoat, 7, 7);
-  //comp board set for test
-  const smCompBoat = Ship("ship1", 1, false);
-  const mdCompBoat = Ship(2, 2, true);
-  const lgCompBoat = Ship(3, 3, false);
-  compBoard.shipPos(smCompBoat, 0, 0);
-  compBoard.shipPos(mdCompBoat, 5, 5);
-  compBoard.shipPos(lgCompBoat, 9, 0);
-
-  //
   const computerTurn = () => {
     setTimeout(function () {
       computer.computerAttack(playerBoard);
@@ -91,6 +128,7 @@ const Game = () => {
 
   const updatePlayerBoardDisplay = () => {
     let old = [...playerDisplay];
+    console.log(old);
     setPlayerDisplay(
       old.map((display) => {
         return display;
@@ -120,7 +158,7 @@ const Game = () => {
       {!game.current && (
         <div>
          <button onClick={startGame}>Start</button>
-        <button onClick={ refreshPage }>Shuffle Ships</button>
+        <button onClick={ shufflePlayerBoard }>Shuffle Ships</button>
 
         </div>
       )}

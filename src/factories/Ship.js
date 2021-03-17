@@ -1,7 +1,7 @@
 const Ship = (id, length, vertical) => {
   let shipHealth = length;
   let sunkStatus = false;
-  let compDisplay = " ";
+  let compDisplay = "x";
   let ship = 'x';
 
   const sunk = () => {

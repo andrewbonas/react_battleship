@@ -42,10 +42,7 @@ const Gameboard = () => {
 
   const shipPos = (ship, row, col) => {
     let updatedBoard = board;
-    if (
-      (ship.vertical && row + ship.length > 10) ||
-      (!ship.vertical && col + ship.length > 10)
-    ) {
+    if (!validPos(ship, row, col)) {
       return false;
     } else {
       for (let i = 0; i < ship.length; i++) {
@@ -58,6 +55,22 @@ const Gameboard = () => {
       return updatedBoard;
     }
   };
+
+  const validPos = (ship, row, col) => {
+    if ((ship.vertical && row + ship.length > 10) || (!ship.vertical && col + ship.length > 10)) {
+    return false
+  }
+  for(let i = 0; i < 10; i++) {
+    if (ship.vertical === true && board[row + i][col] !== "" ) {
+      return false
+    } else if(board[row][col + i] !== "") {
+      return false
+    } else{
+      return true
+    }
+  }
+}
+  
 
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
