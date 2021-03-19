@@ -1,0 +1,80 @@
+h1 {
+  font-size: 30px;
+  color: rgb(54, 54, 54);
+}
+
+.winner {
+  font-size: 30px;
+  color: rgb(54, 54, 54);
+}
+
+.button-ctn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+button {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ed3330;
+  padding: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+button:hover {
+  background: #434343;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.comp-row,
+.user-row {
+  display: flex;
+  height: 3px;
+  padding: 10px;
+  margin: 10px;
+}
+
+span {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(253, 253, 125);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-size: 40px;
+  border: 1px solid rgb(85, 85, 85);
+  padding: 5px;
+  justify-content: space-around;
+  line-height: 15px;
+}
+
+.comp-board-ctn,
+.user-board-ctn {
+  border-radius: 20px;
+  text-align: center;
+  background-color: rgb(170, 169, 169);
+  margin: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  height: 450px;
+}
+
+.boards {
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+}
+
+.buttons {
+  margin: 90px;
+}

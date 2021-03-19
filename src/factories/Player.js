@@ -19,7 +19,7 @@ const Player = (player) => {
   const validShot = (playerBoard, row, col) => {
     if (
       playerBoard.board[row][col] === "" ||
-      playerBoard.board[row][col].ship === "x"
+      playerBoard.board[row][col].ship === "☐"
     ) {
       return true;
     } else {

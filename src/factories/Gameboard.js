@@ -48,7 +48,7 @@ const Gameboard = () => {
 
   const receiveAttack = (row, col) => {
     let attack = board[row][col];
-    if (attack.ship === "x") {
+    if (attack.ship === "☐") {
       attack.attacked(true);
       board[row][col] = "☠";
     } else if (attack === "") {

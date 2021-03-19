@@ -156,58 +156,61 @@ const Game = () => {
 
   return (
     <div className="game">
-      <div className="user-board-ctn">
-        <h1>Player's Board</h1>
-        {playerDisplay.map((row, i) => (
-          <div className="user-row" data-id={i} key={i}>
-            {row.map((col, j) => (
-              <span
-                data-id={j}
-                id={col.id ? col.id : null}
-                className="user-col"
-                key={j}
-              >
-                {col.ship ? col.ship : col}
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-      {!game.current && (
-        <div>
-          <button onClick={startGame}>Start</button>
-          <button onClick={shufflePlayerBoard}>Shuffle Ships</button>
+      <div className="boards">
+        <div className="user-board-ctn">
+          <h1>Player's Board</h1>
+          {playerDisplay.map((row, i) => (
+            <div className="user-row" data-id={i} key={i}>
+              {row.map((col, j) => (
+                <span
+                  data-id={j}
+                  id={col.id ? col.id : null}
+                  className="user-col"
+                  key={j}
+                >
+                  {col.ship ? col.ship : col}
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
-      )}
-      {computerWin && (
-        <div>
-          <div>Computer Wins!</div>
-          <button onClick={refreshPage}>Reset</button>
+        <div className="buttons">
+          {!game.current && (
+            <div className="button-ctn">
+              <button onClick={startGame}>Start</button>
+              <button onClick={shufflePlayerBoard}>Shuffle Ships</button>
+            </div>
+          )}
+          {computerWin && (
+            <div className="button-ctn">
+              <div className="winner">Computer Wins!</div>
+              <button onClick={refreshPage}>Reset</button>
+            </div>
+          )}
+          {playerWin && (
+            <div className="button-ctn">
+              <div className="winner">User Wins!</div>
+              <button onClick={refreshPage}>Reset</button>
+            </div>
+          )}
         </div>
-      )}
-      {playerWin && (
-        <div>
-          <div>User Wins!</div>
-          <button onClick={refreshPage}>Reset</button>
+        <div className="comp-board-ctn">
+          <h1>Computer's Board</h1>
+          {compDisplay.map((row, i) => (
+            <div data-id={i} className="comp-row" key={i}>
+              {row.map((col, j) => (
+                <span
+                  data-id={j}
+                  id={col.id ? col.id : null}
+                  className="comp-col"
+                  key={j}
+                >
+                  {col.compDisplay ? col.compDisplay : col}
+                </span>
+              ))}
+            </div>
+          ))}
         </div>
-      )}
-
-      <div className="comp-board-ctn">
-        <h1>Computer's Board</h1>
-        {compDisplay.map((row, i) => (
-          <div data-id={i} className="comp-row" key={i}>
-            {row.map((col, j) => (
-              <span
-                data-id={j}
-                id={col.id ? col.id : null}
-                className="comp-col"
-                key={j}
-              >
-                {col.compDisplay ? col.compDisplay : col}
-              </span>
-            ))}
-          </div>
-        ))}
       </div>
     </div>
   );
