@@ -13,6 +13,7 @@ h1 {
   flex-direction: column;
   margin-top: 50px;
 }
+
 button {
   color: #fff !important;
   text-transform: uppercase;
@@ -40,6 +41,10 @@ button:hover {
   height: 3px;
   padding: 10px;
   margin: 10px;
+}
+
+.comp-row {
+  cursor:crosshair;
 }
 
 span {

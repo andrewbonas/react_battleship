@@ -1,13 +1,12 @@
 import './styles/App.css';
 import Game from './components/Game'
+import Header from './components/Header'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      <div>Hello</div>
+      <div><Header /></div>
       <div>< Game/></div>
-      </header>
     </div>
   );
 }

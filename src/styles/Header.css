@@ -1,0 +1,9 @@
+header {
+  background: rgb(36, 36, 36);
+  height: 100%;
+  display: flex;
+}
+header h1 {
+  color: rgb(235, 235, 235);
+  margin-left: 10px;
+}
